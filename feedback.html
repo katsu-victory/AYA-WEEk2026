@@ -52,13 +52,11 @@
             print-color-adjust: exact;
         }
 
-        /* A4ページ定義 */
+        /* A4ページ定義（空白ページ防止のため高さをわずかに低く設定） */
         .pdf-page {
             width: 210mm;
-            height: 297mm;
-            /* 1枚目の最後に余白が出ないように微調整 */
+            height: 296mm;
             padding: 10mm 15mm;
-            /* 少し縮小して収まりを良くする */
             margin: 0;
             box-sizing: border-box;
             background: white !important;
@@ -349,148 +347,151 @@
                     </div>
 
                     <!-- 【画面表示用】比較表 -->
-                    <div id="content-details" class="hidden">
-                        <!-- 【ページ2】2ステップ ＆ CS30 -->
-                        <div class="p-5 md:p-8 space-y-6">
-                            <h3 class="text-sm font-bold text-gray-800 border-l-4 border-indigo-600 pl-2">年代別平均値・判定の目安
+                    <div id="content-details" class="hidden p-5 md:p-8">
+                        <!-- タブ切り替え（詳細画面内にも配置） -->
+                        <div class="mb-6 bg-indigo-600 p-1 rounded-xl flex items-center shadow-inner no-print max-w-xs mx-auto"
+                            data-html2canvas-ignore="true">
+                            <button onclick="switchTab('summary')"
+                                class="flex-1 py-1 px-3 rounded text-[11px] font-bold text-white">結果サマリー</button>
+                            <div
+                                class="flex-1 py-1 px-3 rounded text-[11px] font-bold bg-white text-indigo-700 shadow-sm text-center">
+                                詳細データ</div>
+                        </div>
+
+                        <div class="space-y-6">
+                            <h3 class="text-xs font-bold text-gray-800 border-l-4 border-indigo-600 pl-2">年代別平均値・判定の目安
                             </h3>
-
-                            <!-- ① 2ステップ -->
-                            <div class="space-y-3 avoid-break">
-                                <h4 class="text-xs font-bold text-orange-900 bg-orange-50 px-3 py-2 rounded">① 2ステップテスト
-                                </h4>
-                                <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
-                                    <table
-                                        class="w-full text-[11px] md:text-sm text-left border-collapse min-w-[400px]">
-                                        <thead class="bg-slate-100 text-gray-700 text-center font-bold">
-                                            <tr>
-                                                <th class="border-b border-gray-200 p-2 w-1/4">年代</th>
-                                                <th class="border-b border-gray-200 p-2">男平均</th>
-                                                <th class="border-b border-gray-200 p-2">女平均</th>
-                                                <th class="border-b border-gray-200 p-2">判定基準</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-gray-600 text-center">
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">20代/30代</td>
-                                                <td class="p-2 border-b border-gray-100 font-bold">1.55</td>
-                                                <td class="p-2 border-b border-gray-100 font-bold">1.45</td>
-                                                <td rowspan="7"
-                                                    class="p-2 border-b border-gray-100 text-[10px] md:text-xs leading-snug text-left bg-slate-50">
-                                                    【ロコモ判定】<br>1.30以上:正常<br>1.1-1.3:ロコモ1<br>0.9-1.1:ロコモ2<br>0.9未満:ロコモ3
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">40代</td>
-                                                <td class="p-2 border-b border-gray-100">1.52</td>
-                                                <td class="p-2 border-b border-gray-100">1.45</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">50代</td>
-                                                <td class="p-2 border-b border-gray-100">1.50</td>
-                                                <td class="p-2 border-b border-gray-100">1.45</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">60代</td>
-                                                <td class="p-2 border-b border-gray-100">1.48</td>
-                                                <td class="p-2 border-b border-gray-100">1.40</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">70代</td>
-                                                <td class="p-2 border-b border-gray-100">1.40</td>
-                                                <td class="p-2 border-b border-gray-100">1.28</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-2 border-b border-gray-100">80代〜</td>
-                                                <td class="p-2 border-b border-gray-100">1.25</td>
-                                                <td class="p-2 border-b border-gray-100">1.10</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <p class="text-[10px] text-gray-500 font-medium px-1 mt-1">参照：ロコモONLINE（2ステップテスト）<br><a
-                                        href="https://locomo-joa.jp/check/test/two-step/"
-                                        class="underline text-blue-600">https://locomo-joa.jp/check/test/two-step/</a>
-                                </p>
+                            <h4 class="text-xs font-bold text-orange-900 bg-orange-50 px-3 py-2 rounded">① 2ステップテスト
+                            </h4>
+                            <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+                                <table class="w-full text-[11px] md:text-sm text-left border-collapse min-w-[400px]">
+                                    <thead class="bg-slate-100 text-gray-700 text-center font-bold">
+                                        <tr>
+                                            <th class="border-b border-gray-200 p-2 w-1/4">年代</th>
+                                            <th class="border-b border-gray-200 p-2">男平均</th>
+                                            <th class="border-b border-gray-200 p-2">女平均</th>
+                                            <th class="border-b border-gray-200 p-2">判定基準</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-600 text-center">
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">20代/30代</td>
+                                            <td class="p-2 border-b border-gray-100 font-bold">1.55</td>
+                                            <td class="p-2 border-b border-gray-100 font-bold">1.45</td>
+                                            <td rowspan="7"
+                                                class="p-2 border-b border-gray-100 text-[10px] md:text-xs leading-snug text-left bg-slate-50">
+                                                【ロコモ判定】<br>1.30以上:正常<br>1.1-1.3:ロコモ1<br>0.9-1.1:ロコモ2<br>0.9未満:ロコモ3
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">40代</td>
+                                            <td class="p-2 border-b border-gray-100">1.52</td>
+                                            <td class="p-2 border-b border-gray-100">1.45</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">50代</td>
+                                            <td class="p-2 border-b border-gray-100">1.50</td>
+                                            <td class="p-2 border-b border-gray-100">1.45</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">60代</td>
+                                            <td class="p-2 border-b border-gray-100">1.48</td>
+                                            <td class="p-2 border-b border-gray-100">1.40</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">70代</td>
+                                            <td class="p-2 border-b border-gray-100">1.40</td>
+                                            <td class="p-2 border-b border-gray-100">1.28</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-2 border-b border-gray-100">80代〜</td>
+                                            <td class="p-2 border-b border-gray-100">1.25</td>
+                                            <td class="p-2 border-b border-gray-100">1.10</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <p class="text-[10px] text-gray-500 font-medium px-1 mt-1">参照：ロコモONLINE（2ステップテスト）<br><a
+                                    href="https://locomo-joa.jp/check/test/two-step/"
+                                    class="underline text-blue-600">https://locomo-joa.jp/check/test/two-step/</a>
+                            </p>
+                        </div>
 
-                            <!-- ② 30秒椅子立ち上がり -->
-                            <div class="space-y-3 avoid-break">
-                                <h4 class="text-xs font-bold text-green-900 bg-green-50 px-3 py-2 rounded">②
-                                    30秒椅子立ち上がりテスト</h4>
-                                <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
-                                    <table
-                                        class="w-full text-[11px] md:text-sm text-left border-collapse min-w-[500px]">
-                                        <thead class="bg-slate-100 text-gray-700 text-center font-bold">
-                                            <tr>
-                                                <th class="border-b border-gray-200 p-2 w-1/4">年代</th>
-                                                <th class="border-b border-gray-200 p-2">男平均（5段階評価の3に相当）</th>
-                                                <th class="border-b border-gray-200 p-2">女平均（5段階評価の3に相当）</th>
-                                                <th class="border-b border-gray-200 p-2">判定基準</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-gray-600 text-center">
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">20代</td>
-                                                <td class="p-1 border-b border-gray-100 font-bold">32-28回</td>
-                                                <td class="p-1 border-b border-gray-100 font-bold">28-23回</td>
-                                                <td rowspan="9"
-                                                    class="p-2 border-b border-gray-100 text-[10px] md:text-xs leading-snug text-left bg-slate-50">
-                                                    【5段階評価】<br>5:優れている<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">30代</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">30-26回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">28-24回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">40代</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">29-25回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">27-23回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">50代</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">27-22回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">24-20回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">60-64歳</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">25-20回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">23-19回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">65-69歳</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">21-18回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">21-17回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">70-74歳</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">20-16回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">19-15回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-100">75-79歳</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">17-15回</td>
-                                                <td class="p-1 border-b border-gray-100 font-medium">17-13回</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="p-1 border-b border-gray-200">80歳以上</td>
-                                                <td class="p-1 border-b border-gray-200 font-medium">16-14回</td>
-                                                <td class="p-1 border-b border-gray-200 font-medium">16-13回</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <p class="text-[10px] text-gray-500 font-medium px-1 mt-1">参照：日本健康運動研究所
-                                    (30秒椅子立ち上がりテスト)<br><a href="https://jhei.net/exer/measurement/me05.html"
-                                        class="underline text-blue-600">https://jhei.net/exer/measurement/me05.html</a>
-                                </p>
+                        <!-- ② 30秒椅子立ち上がり -->
+                        <div class="space-y-3 avoid-break">
+                            <h4 class="text-xs font-bold text-green-900 bg-green-50 px-3 py-2 rounded">②
+                                30秒椅子立ち上がりテスト</h4>
+                            <div class="overflow-x-auto border border-gray-200 rounded-lg shadow-sm">
+                                <table class="w-full text-[11px] md:text-sm text-left border-collapse min-w-[500px]">
+                                    <thead class="bg-slate-100 text-gray-700 text-center font-bold">
+                                        <tr>
+                                            <th class="border-b border-gray-200 p-2 w-1/4">年代</th>
+                                            <th class="border-b border-gray-200 p-2">男平均（5段階評価の3に相当）</th>
+                                            <th class="border-b border-gray-200 p-2">女平均（5段階評価の3に相当）</th>
+                                            <th class="border-b border-gray-200 p-2">判定基準</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-gray-600 text-center">
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">20代</td>
+                                            <td class="p-1 border-b border-gray-100 font-bold">32-28回</td>
+                                            <td class="p-1 border-b border-gray-100 font-bold">28-23回</td>
+                                            <td rowspan="9"
+                                                class="p-2 border-b border-gray-100 text-[10px] md:text-xs leading-snug text-left bg-slate-50">
+                                                【5段階評価】<br>5:優れている<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">30代</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">30-26回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">28-24回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">40代</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">29-25回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">27-23回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">50代</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">27-22回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">24-20回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">60-64歳</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">25-20回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">23-19回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">65-69歳</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">21-18回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">21-17回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">70-74歳</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">20-16回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">19-15回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-100">75-79歳</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">17-15回</td>
+                                            <td class="p-1 border-b border-gray-100 font-medium">17-13回</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1 border-b border-gray-200">80歳以上</td>
+                                            <td class="p-1 border-b border-gray-200 font-medium">16-14回</td>
+                                            <td class="p-1 border-b border-gray-200 font-medium">16-13回</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                            <p class="text-[10px] text-gray-500 font-medium px-1 mt-1">参照：日本健康運動研究所
+                                (30秒椅子立ち上がりテスト)<br><a href="https://jhei.net/exer/measurement/me05.html"
+                                    class="underline text-blue-600">https://jhei.net/exer/measurement/me05.html</a>
+                            </p>
                         </div>
 
                         <!-- 【ページ3】片足立ち -->
-                        <div style="page-break-before: always;"></div>
-                        <div class="p-5 md:p-8 space-y-6">
+                        <div class="space-y-6 mt-8 border-t border-gray-100 pt-8 no-print"
+                            data-html2canvas-ignore="true">
                             <div class="space-y-3 avoid-break">
                                 <h4 class="text-xs font-bold text-blue-900 bg-blue-50 px-3 py-2 rounded">③ 片足立ちテスト</h4>
 
@@ -577,481 +578,470 @@
                                         href="https://jhei.net/exer/measurement/me04.html"
                                         class="underline text-blue-600">https://jhei.net/exer/measurement/me04.html</a>
                                 </p>
-                                <div class="h-10 no-print"></div>
-                                <div class="h-[60px] hidden print:block"></div> <!-- PDF末尾の切れ防止用余白 -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- PDF出力用構造（画面外に配置） -->
-                    <div id="pdf-capture-area">
-                        <!-- 【ページ1】サマリー -->
-                        <div id="p1" class="pdf-page bg-white">
-                            <div id="summary-clone"></div> <!-- JSで中身をコピー -->
-                        </div>
-
-                        <!-- 【ページ2】2ステップ ＆ CS30 -->
-                        <div id="p2" class="pdf-page bg-white">
-                            <h3 class="font-bold text-gray-800">年代別平均値・判定の目安</h3>
-
-                            <!-- ① 2ステップ -->
-                            <div class="space-y-2 avoid-break mb-8">
-                                <h4 class="font-bold text-orange-900 bg-orange-50">① 2ステップテスト</h4>
-                                <!-- ① 2ステップ -->
-                                <div class="avoid-break mb-8">
-                                    <h4 class="font-bold text-orange-900 bg-orange-50 px-3 py-1">① 2ステップテスト</h4>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">年代</th>
-                                                <th style="width:25%">男平均</th>
-                                                <th style="width:25%">女平均</th>
-                                                <th style="width:25%">判定基準</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>20/30代</td>
-                                                <td class="font-bold">1.55</td>
-                                                <td class="font-bold">1.45</td>
-                                                <td rowspan="6" class="text-left bg-gray-50">
-                                                    【ロコモ判定】<br>1.30以上:正常<br>1.1-1.3:ロコモ1<br>0.9-1.1:ロコモ2<br>0.9未満:ロコモ3
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>40代</td>
-                                                <td>1.52</td>
-                                                <td>1.45</td>
-                                            </tr>
-                                            <tr>
-                                                <td>50代</td>
-                                                <td>1.50</td>
-                                                <td>1.45</td>
-                                            </tr>
-                                            <tr>
-                                                <td>60代</td>
-                                                <td>1.48</td>
-                                                <td>1.40</td>
-                                            </tr>
-                                            <tr>
-                                                <td>70代</td>
-                                                <td>1.40</td>
-                                                <td>1.28</td>
-                                            </tr>
-                                            <tr>
-                                                <td>80代〜</td>
-                                                <td>1.25</td>
-                                                <td>1.10</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <p class="text-[9px] text-gray-500">
-                                        参照：ロコモONLINE（2ステップテスト）<br>https://locomo-joa.jp/check/test/two-step/</p>
-                                </div>
-
-                                <!-- ② 30秒椅子立ち上がり -->
-                                <div class="avoid-break mt-4">
-                                    <h4 class="font-bold text-green-900 bg-green-50 px-3 py-1">② 30秒椅子立ち上がりテスト</h4>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th style="width:25%">年代</th>
-                                                <th style="width:25%">男平均(3相当)</th>
-                                                <th style="width:25%">女平均(3相当)</th>
-                                                <th style="width:25%">判定基準</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>20代</td>
-                                                <td class="font-bold">32-28回</td>
-                                                <td class="font-bold">28-23回</td>
-                                                <td rowspan="9" class="text-left bg-gray-50">
-                                                    【5段階評価】<br>5:優れている<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
-                                            </tr>
-                                            <tr>
-                                                <td>30代</td>
-                                                <td>30-26回</td>
-                                                <td>28-24回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>40代</td>
-                                                <td>29-25回</td>
-                                                <td>27-23回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>50代</td>
-                                                <td>27-22回</td>
-                                                <td>24-20回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>60-64歳</td>
-                                                <td>25-20回</td>
-                                                <td>23-19回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>65-69歳</td>
-                                                <td>21-18回</td>
-                                                <td>21-17回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>70-74歳</td>
-                                                <td>20-16回</td>
-                                                <td>19-15回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>75-79歳</td>
-                                                <td>17-15回</td>
-                                                <td>17-13回</td>
-                                            </tr>
-                                            <tr>
-                                                <td>80歳以上</td>
-                                                <td>16-14回</td>
-                                                <td>16-13回</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <p class="text-[9px] text-gray-500">参照：日本健康運動研究所
-                                        (CS30)<br>https://jhei.net/exer/measurement/me05.html</p>
-                                </div>
-                            </div>
-
-                            <!-- 【ページ3】片足立ち -->
-                            <div id="p3" class="pdf-page pdf-page-last bg-white">
-                                <div>
-                                    <h3 class="font-bold text-blue-900 bg-blue-50 px-3 py-2"
-                                        style="border-left: 4px solid #3b82f6; margin-bottom: 20px;">③ 片足立ちテスト</h3>
-
-                                    <div class="avoid-break" style="margin-bottom: 25px;">
-                                        <p class="text-[10px] font-bold mb-1">【A】閉眼での測定（主に64歳以下）</p>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:20%">年代</th>
-                                                    <th style="width:30%">男平均(3相当)</th>
-                                                    <th style="width:30%">女平均(3相当)</th>
-                                                    <th style="width:20%">判定基準</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>20代</td>
-                                                    <td class="font-bold">21~66秒</td>
-                                                    <td class="font-bold">21~64秒</td>
-                                                    <td rowspan="5" class="text-left bg-gray-50">
-                                                        【5段階評価】<br>5:優秀<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>30代</td>
-                                                    <td>17~51秒</td>
-                                                    <td>17~53秒</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>40代</td>
-                                                    <td>13~37秒</td>
-                                                    <td>13~41秒</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>50代</td>
-                                                    <td>9~24秒</td>
-                                                    <td>9~27秒</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>60-64歳</td>
-                                                    <td>5~10秒</td>
-                                                    <td>5~11秒</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                    <div class="avoid-break">
-                                        <p class="text-[10px] font-bold mb-1">【B】開眼での測定（主に65歳以上）</p>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th style="width:20%">年代</th>
-                                                    <th style="width:30%">男平均</th>
-                                                    <th style="width:30%">女平均</th>
-                                                    <th style="width:20%">判定基準</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>65歳以上</td>
-                                                    <td class="font-bold">15~30秒</td>
-                                                    <td class="font-bold">12~25秒</td>
-                                                    <td class="text-left bg-gray-50">※同上の5段階基準</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="text-[9px] text-gray-500 mt-4">参照：日本健康運動研究所
-                                            (片足立ち)<br>https://jhei.net/exer/measurement/me04.html</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 操作エリア -->
-            <div class="mt-6 space-y-3 no-print" data-html2canvas-ignore="true">
-                <div class="grid grid-cols-2 gap-3">
-                    <button onclick="saveAsPDF(event)"
-                        class="bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        PDF保存
-                    </button>
-                    <button onclick="window.print()"
-                        class="bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-                        </svg>
-                        印刷/保存
-                    </button>
+                <!-- PDF出力用構造（改ページ位置のズレ防止のため改行・空白を除去） -->
+                <div id="pdf-capture-area">
+                    <div id="p1" class="pdf-page bg-white">
+                        <div id="summary-clone"></div>
+                    </div>
+                    <div id="p2" class="pdf-page bg-white">
+                        <h3 class="font-bold text-gray-800"
+                            style="border-left: 4px solid #4338ca; padding-left: 10px; margin-bottom: 20px;">
+                            年代別平均値・判定の目安</h3>
+
+                        <!-- ① 2ステップ -->
+                        <div class="avoid-break" style="margin-bottom: 30px;">
+                            <h4 class="font-bold text-orange-900 bg-orange-50 px-3 py-1">① 2ステップテスト</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:25%">年代</th>
+                                        <th style="width:25%">男平均</th>
+                                        <th style="width:25%">女平均</th>
+                                        <th style="width:25%">判定基準</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>20/30代</td>
+                                        <td class="font-bold">1.55</td>
+                                        <td class="font-bold">1.45</td>
+                                        <td rowspan="6" class="text-left bg-gray-50">
+                                            【ロコモ判定】<br>1.30以上:正常<br>1.1-1.3:ロコモ1<br>0.9-1.1:ロコモ2<br>0.9未満:ロコモ3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40代</td>
+                                        <td>1.52</td>
+                                        <td>1.45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50代</td>
+                                        <td>1.50</td>
+                                        <td>1.45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>60代</td>
+                                        <td>1.48</td>
+                                        <td>1.40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>70代</td>
+                                        <td>1.40</td>
+                                        <td>1.28</td>
+                                    </tr>
+                                    <tr>
+                                        <td>80代〜</td>
+                                        <td>1.25</td>
+                                        <td>1.10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-[9px] text-gray-500">
+                                参照：ロコモONLINE（2ステップテスト）<br>https://locomo-joa.jp/check/test/two-step/</p>
+                        </div>
+
+                        <!-- ② 30秒椅子立ち上がり -->
+                        <div class="avoid-break">
+                            <h4 class="font-bold text-green-900 bg-green-50 px-3 py-1">② 30秒椅子立ち上がりテスト</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:25%">年代</th>
+                                        <th style="width:25%">男平均(3相当)</th>
+                                        <th style="width:25%">女平均(3相当)</th>
+                                        <th style="width:25%">判定基準</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>20代</td>
+                                        <td class="font-bold">32-28回</td>
+                                        <td class="font-bold">28-23回</td>
+                                        <td rowspan="9" class="text-left bg-gray-50">
+                                            【5段階評価】<br>5:優秀<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30代</td>
+                                        <td>30-26回</td>
+                                        <td>28-24回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>40代</td>
+                                        <td>29-25回</td>
+                                        <td>27-23回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50代</td>
+                                        <td>27-22回</td>
+                                        <td>24-20回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>60-64歳</td>
+                                        <td>25-20回</td>
+                                        <td>23-19回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>65-69歳</td>
+                                        <td>21-18回</td>
+                                        <td>21-17回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>70-74歳</td>
+                                        <td>20-16回</td>
+                                        <td>19-15回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>75-79歳</td>
+                                        <td>17-15回</td>
+                                        <td>17-13回</td>
+                                    </tr>
+                                    <tr>
+                                        <td>80歳以上</td>
+                                        <td>16-14回</td>
+                                        <td>16-13回</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-[9px] text-gray-500">参照：日本健康運動研究所
+                                (CS30)<br>https://jhei.net/exer/measurement/me05.html</p>
+                        </div>
+                    </div>
+                    <div id="p3" class="pdf-page pdf-page-last bg-white">
+                        <div>
+                            <h3 class="font-bold text-blue-900 bg-blue-50 px-3 py-2"
+                                style="border-left: 4px solid #3b82f6; margin-bottom: 20px;">③ 片足立ちテスト</h3>
+
+                            <div class="avoid-break" style="margin-bottom: 25px;">
+                                <p class="text-[10px] font-bold mb-1">【A】閉眼での測定（主に64歳以下）</p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width:20%">年代</th>
+                                            <th style="width:30%">男平均(3相当)</th>
+                                            <th style="width:30%">女平均(3相当)</th>
+                                            <th style="width:20%">判定基準</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>20代</td>
+                                            <td class="font-bold">21~66秒</td>
+                                            <td class="font-bold">21~64秒</td>
+                                            <td rowspan="5" class="text-left bg-gray-50">
+                                                【5段階評価】<br>5:優秀<br>4:やや良い<br>3:ふつう<br>2:やや劣る<br>1:劣っている</td>
+                                        </tr>
+                                        <tr>
+                                            <td>30代</td>
+                                            <td>17~51秒</td>
+                                            <td>17~53秒</td>
+                                        </tr>
+                                        <tr>
+                                            <td>40代</td>
+                                            <td>13~37秒</td>
+                                            <td>13~41秒</td>
+                                        </tr>
+                                        <tr>
+                                            <td>50代</td>
+                                            <td>9~24秒</td>
+                                            <td>9~27秒</td>
+                                        </tr>
+                                        <tr>
+                                            <td>60-64歳</td>
+                                            <td>5~10秒</td>
+                                            <td>5~11秒</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="avoid-break">
+                                <p class="text-[10px] font-bold mb-1">【B】開眼での測定（主に65歳以上）</p>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="width:20%">年代</th>
+                                            <th style="width:30%">男平均</th>
+                                            <th style="width:30%">女平均</th>
+                                            <th style="width:20%">判定基準</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>65歳以上</td>
+                                            <td class="font-bold">15~30秒</td>
+                                            <td class="font-bold">12~25秒</td>
+                                            <td class="text-left bg-gray-50">※同上の5段階基準</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="text-[9px] text-gray-500 mt-4">参照：日本健康運動研究所
+                                    (片足立ち)<br>https://jhei.net/exer/measurement/me04.html</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button onclick="location.reload()"
-                    class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold">最初の画面に戻る</button>
-                <div id="fallback-msg" class="text-[10px] text-gray-500 bg-gray-100 p-2 rounded text-center">
-                    PDF保存が動かない場合は「印刷」から「PDFとして保存」を選択、またはスクリーンショットを撮ってください。
+                <!-- 操作エリア (結果が表示された時のみ表示) -->
+                <div class="mt-6 space-y-3 no-print" data-html2canvas-ignore="true">
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="saveAsPDF(event)"
+                            class="bg-emerald-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            PDF保存
+                        </button>
+                        <button onclick="window.print()"
+                            class="bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-md flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            印刷/保存
+                        </button>
+                    </div>
+                    <button onclick="location.reload()"
+                        class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold">最初の画面に戻る</button>
+                    <div id="fallback-msg" class="text-[10px] text-gray-500 bg-gray-100 p-2 rounded text-center">
+                        PDF保存が動かない場合は「印刷」から「PDFとして保存」を選択、またはスクリーンショットを撮ってください。
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </div> <!-- result-section の閉じ -->
+        </div> <!-- app-container の閉じ -->
 
-    <script>
-        const form = document.getElementById('measurement-form');
-        const inputSection = document.getElementById('input-section');
-        const resultSection = document.getElementById('result-section');
+        <script>
+            const form = document.getElementById('measurement-form');
+            const inputSection = document.getElementById('input-section');
+            const resultSection = document.getElementById('result-section');
 
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            calculate();
-        });
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                calculate();
+            });
 
-        function calculate() {
-            try {
-                const sex = document.getElementById('gender').value; // 'gender' from HTML but 'sex' used in logic
-                const ageGroup = parseInt(document.getElementById('age-group').value);
-                const height = parseFloat(document.getElementById('height').value);
-                const ts = parseFloat(document.getElementById('two-step').value);
-                const cs = parseInt(document.getElementById('cs30').value);
-                const leg = parseFloat(document.getElementById('one-leg').value);
-                const method = document.getElementById('one-leg-method').value;
+            function calculate() {
+                try {
+                    const sex = document.getElementById('gender').value; // 'gender' from HTML but 'sex' used in logic
+                    const ageGroup = parseInt(document.getElementById('age-group').value);
+                    const height = parseFloat(document.getElementById('height').value);
+                    const ts = parseFloat(document.getElementById('two-step').value);
+                    const cs = parseInt(document.getElementById('cs30').value);
+                    const leg = parseFloat(document.getElementById('one-leg').value);
+                    const method = document.getElementById('one-leg-method').value;
 
-                // 表示
-                const methodLabel = method === 'closed' ? '閉眼' : '開眼';
-                document.getElementById('result-profile').innerText = `${sex === 'male' ? '男性' : '女性'} / ${ageGroup}代 / 身長 ${height}cm / 片足立ち:${methodLabel}`;
-                document.getElementById('result-date').innerText = `測定: ${new Date().toLocaleString()}`;
+                    // 表示
+                    const methodLabel = method === 'closed' ? '閉眼' : '開眼';
+                    document.getElementById('result-profile').innerText = `${sex === 'male' ? '男性' : '女性'} / ${ageGroup}代 / 身長 ${height}cm / 片足立ち:${methodLabel}`;
+                    document.getElementById('result-date').innerText = `測定: ${new Date().toLocaleString()}`;
 
-                // 2step
-                const idx = (ts / height).toFixed(2);
-                document.getElementById('score-two-step').innerText = idx;
+                    // 2step
+                    const idx = (ts / height).toFixed(2);
+                    document.getElementById('score-two-step').innerText = idx;
 
-                // 最新の研究データに基づく年代別平均（Mean）
-                const tsMeanTable = {
-                    male: { 20: 1.55, 30: 1.55, 40: 1.52, 50: 1.50, 60: 1.48, 70: 1.40, 80: 1.25 },
-                    female: { 20: 1.45, 30: 1.45, 40: 1.45, 50: 1.45, 60: 1.40, 70: 1.28, 80: 1.10 }
-                };
-                const meanVal = getClosestThresholds(tsMeanTable, sex, ageGroup);
-                const relativeToMean = idx >= meanVal ? "年代平均以上" : "年代平均未満";
+                    // 最新の研究データに基づく年代別平均（Mean）
+                    const tsMeanTable = {
+                        male: { 20: 1.55, 30: 1.55, 40: 1.52, 50: 1.50, 60: 1.48, 70: 1.40, 80: 1.25 },
+                        female: { 20: 1.45, 30: 1.45, 40: 1.45, 50: 1.45, 60: 1.40, 70: 1.28, 80: 1.10 }
+                    };
+                    const meanVal = getClosestThresholds(tsMeanTable, sex, ageGroup);
+                    const relativeToMean = idx >= meanVal ? "年代平均以上" : "年代平均未満";
 
-                let evalTs = "";
-                let locomoStatus = "";
-                if (idx >= 1.3) {
-                    locomoStatus = "正常";
-                    evalTs = "移動能力は十分維持されています。この調子で維持しましょう！";
-                } else if (idx >= 1.1) {
-                    locomoStatus = "ロコモ度１";
-                    evalTs = "移動機能の低下が始まっています。適度な運動を習慣にしましょう。";
-                } else if (idx >= 0.9) {
-                    locomoStatus = "ロコモ度２";
-                    evalTs = "半分以下に低下しています。積極的な対策が必要です。";
-                } else {
-                    locomoStatus = "ロコモ度３";
-                    evalTs = "社会生活に支障が出るレベルです。専門医へ相談しましょう。";
-                }
-                document.getElementById('eval-two-step').innerHTML = `<span class="inline-block bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 mb-1">${locomoStatus}</span><br><span class="text-orange-700">${relativeToMean}</span><br>${evalTs}`;
-
-                // 汎用的な年代マッピング関数
-                function getClosestThresholds(table, sex, age) {
-                    const ageKeys = Object.keys(table[sex]).map(Number).sort((a, b) => b - a);
-                    // 入力年齢以下の最大のキーを探す（例：30代->30, 35代->30）
-                    const match = ageKeys.find(key => age >= key) || ageKeys[ageKeys.length - 1];
-                    return table[sex][match];
-                }
-
-                // CS30
-                document.getElementById('score-cs30').innerText = cs;
-                const csTable = {
-                    male: {
-                        20: [22, 27, 32, 37], 30: [20, 25, 30, 36], 40: [19, 24, 29, 35],
-                        50: [17, 21, 27, 31], 60: [13, 19, 25, 31], 65: [13, 17, 21, 25],
-                        70: [11, 15, 20, 24], 75: [10, 14, 17, 21], 80: [9, 13, 16, 19]
-                    },
-                    female: {
-                        20: [17, 22, 28, 34], 30: [17, 23, 28, 33], 40: [16, 22, 27, 33],
-                        50: [15, 19, 24, 29], 60: [13, 18, 23, 28], 65: [11, 16, 21, 26],
-                        70: [9, 14, 19, 23], 75: [8, 12, 17, 21], 80: [8, 12, 16, 19]
+                    let evalTs = "";
+                    let locomoStatus = "";
+                    if (idx >= 1.3) {
+                        locomoStatus = "正常";
+                        evalTs = "移動能力は十分維持されています。この調子で維持しましょう！";
+                    } else if (idx >= 1.1) {
+                        locomoStatus = "ロコモ度１";
+                        evalTs = "移動機能の低下が始まっています。適度な運動を習慣にしましょう。";
+                    } else if (idx >= 0.9) {
+                        locomoStatus = "ロコモ度２";
+                        evalTs = "半分以下に低下しています。積極的な対策が必要です。";
+                    } else {
+                        locomoStatus = "ロコモ度３";
+                        evalTs = "社会生活に支障が出るレベルです。専門医へ相談しましょう。";
                     }
-                };
+                    document.getElementById('eval-two-step').innerHTML = `<span class="inline-block bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded-full mr-2 mb-1">${locomoStatus}</span><br><span class="text-orange-700">${relativeToMean}</span><br>${evalTs}`;
 
-                const thresholdsCs = getClosestThresholds(csTable, sex, ageGroup);
-                let scoreCs = 0;
-                if (cs <= thresholdsCs[0]) scoreCs = 1;
-                else if (cs <= thresholdsCs[1]) scoreCs = 2;
-                else if (cs <= thresholdsCs[2]) scoreCs = 3;
-                else if (cs <= thresholdsCs[3]) scoreCs = 4;
-                else scoreCs = 5;
+                    // 汎用的な年代マッピング関数
+                    function getClosestThresholds(table, sex, age) {
+                        const ageKeys = Object.keys(table[sex]).map(Number).sort((a, b) => b - a);
+                        // 入力年齢以下の最大のキーを探す（例：30代->30, 35代->30）
+                        const match = ageKeys.find(key => age >= key) || ageKeys[ageKeys.length - 1];
+                        return table[sex][match];
+                    }
 
-                const relativeToMeanCs = scoreCs >= 4 ? "年代平均以上" : (scoreCs == 3 ? "年代平均並み" : "年代平均未満");
-                const statusCs = scoreCs >= 4 ? "優秀" : (scoreCs >= 3 ? "標準" : "低下");
-                const colorCs = scoreCs >= 4 ? "bg-green-600" : (scoreCs >= 3 ? "bg-blue-600" : "bg-rose-600");
+                    // CS30
+                    document.getElementById('score-cs30').innerText = cs;
+                    const csTable = {
+                        male: {
+                            20: [22, 27, 32, 37], 30: [20, 25, 30, 36], 40: [19, 24, 29, 35],
+                            50: [17, 21, 27, 31], 60: [13, 19, 25, 31], 65: [13, 17, 21, 25],
+                            70: [11, 15, 20, 24], 75: [10, 14, 17, 21], 80: [9, 13, 16, 19]
+                        },
+                        female: {
+                            20: [17, 22, 28, 34], 30: [17, 23, 28, 33], 40: [16, 22, 27, 33],
+                            50: [15, 19, 24, 29], 60: [13, 18, 23, 28], 65: [11, 16, 21, 26],
+                            70: [9, 14, 19, 23], 75: [8, 12, 17, 21], 80: [8, 12, 16, 19]
+                        }
+                    };
 
-                document.getElementById('eval-cs30').innerHTML = `
+                    const thresholdsCs = getClosestThresholds(csTable, sex, ageGroup);
+                    let scoreCs = 0;
+                    if (cs <= thresholdsCs[0]) scoreCs = 1;
+                    else if (cs <= thresholdsCs[1]) scoreCs = 2;
+                    else if (cs <= thresholdsCs[2]) scoreCs = 3;
+                    else if (cs <= thresholdsCs[3]) scoreCs = 4;
+                    else scoreCs = 5;
+
+                    const relativeToMeanCs = scoreCs >= 4 ? "年代平均以上" : (scoreCs == 3 ? "年代平均並み" : "年代平均未満");
+                    const statusCs = scoreCs >= 4 ? "優秀" : (scoreCs >= 3 ? "標準" : "低下");
+                    const colorCs = scoreCs >= 4 ? "bg-green-600" : (scoreCs >= 3 ? "bg-blue-600" : "bg-rose-600");
+
+                    document.getElementById('eval-cs30').innerHTML = `
                     <span class="inline-block ${colorCs} text-white text-[10px] px-2 py-0.5 rounded-full mr-2 mb-1">${statusCs}</span><br>
                     <span class="text-green-700 font-bold">${relativeToMeanCs}</span><br>
                     ${scoreCs <= 2 ? "脚力の強化が推奨されます。" : "現状の脚力を維持しましょう。"}
                 `;
 
-                // 片足
-                document.getElementById('score-one-leg').innerText = leg.toFixed(1);
-                let evalLeg = "";
-                let score = 0;
+                    // 片足
+                    document.getElementById('score-one-leg').innerText = leg.toFixed(1);
+                    let evalLeg = "";
+                    let score = 0;
 
-                if (method === 'closed') {
-                    const closedTable = {
-                        male: {
-                            20: [6, 21, 66, 204], 25: [5, 20, 64, 200], 30: [5, 16, 51, 156], 35: [4, 14, 44, 133],
-                            40: [4, 12, 37, 110], 45: [3, 10, 30, 87], 50: [2, 8, 24, 66], 55: [2, 6, 17, 44], 60: [1, 2, 10, 24]
-                        },
-                        female: {
-                            20: [6, 20, 64, 199], 25: [5, 20, 63, 196], 30: [5, 16, 53, 167], 35: [4, 14, 47, 148],
-                            40: [3, 12, 41, 127], 45: [3, 10, 34, 105], 50: [2, 8, 27, 80], 55: [2, 6, 19, 55], 60: [1, 2, 11, 28]
-                        }
-                    };
-                    const thresholds = getClosestThresholds(closedTable, sex, ageGroup);
-                    if (leg <= thresholds[0]) score = 1;
-                    else if (leg <= thresholds[1]) score = 2;
-                    else if (leg <= thresholds[2]) score = 3;
-                    else if (leg <= thresholds[3]) score = 4;
-                    else score = 5;
-                } else {
-                    const openTable = {
-                        male: [6, 14, 30, 72],
-                        female: [4, 11, 25, 66]
-                    };
-                    const thresholds = openTable[sex];
-                    if (leg <= thresholds[0]) score = 1;
-                    else if (leg <= thresholds[1]) score = 2;
-                    else if (leg <= thresholds[2]) score = 3;
-                    else if (leg <= thresholds[3]) score = 4;
-                    else score = 5;
-                }
+                    if (method === 'closed') {
+                        const closedTable = {
+                            male: {
+                                20: [6, 21, 66, 204], 25: [5, 20, 64, 200], 30: [5, 16, 51, 156], 35: [4, 14, 44, 133],
+                                40: [4, 12, 37, 110], 45: [3, 10, 30, 87], 50: [2, 8, 24, 66], 55: [2, 6, 17, 44], 60: [1, 2, 10, 24]
+                            },
+                            female: {
+                                20: [6, 20, 64, 199], 25: [5, 20, 63, 196], 30: [5, 16, 53, 167], 35: [4, 14, 47, 148],
+                                40: [3, 12, 41, 127], 45: [3, 10, 34, 105], 50: [2, 8, 27, 80], 55: [2, 6, 19, 55], 60: [1, 2, 11, 28]
+                            }
+                        };
+                        const thresholds = getClosestThresholds(closedTable, sex, ageGroup);
+                        if (leg <= thresholds[0]) score = 1;
+                        else if (leg <= thresholds[1]) score = 2;
+                        else if (leg <= thresholds[2]) score = 3;
+                        else if (leg <= thresholds[3]) score = 4;
+                        else score = 5;
+                    } else {
+                        const openTable = {
+                            male: [6, 14, 30, 72],
+                            female: [4, 11, 25, 66]
+                        };
+                        const thresholds = openTable[sex];
+                        if (leg <= thresholds[0]) score = 1;
+                        else if (leg <= thresholds[1]) score = 2;
+                        else if (leg <= thresholds[2]) score = 3;
+                        else if (leg <= thresholds[3]) score = 4;
+                        else score = 5;
+                    }
 
-                const relativeToMeanLeg = score >= 4 ? "年代平均以上" : (score == 3 ? "年代平均並み" : "年代平均未満");
-                const statusLeg = score >= 4 ? "優秀" : (score >= 3 ? "標準" : "低下");
-                const colorLeg = score >= 4 ? "bg-blue-600" : (score >= 3 ? "bg-indigo-600" : "bg-rose-600");
+                    const relativeToMeanLeg = score >= 4 ? "年代平均以上" : (score == 3 ? "年代平均並み" : "年代平均未満");
+                    const statusLeg = score >= 4 ? "優秀" : (score >= 3 ? "標準" : "低下");
+                    const colorLeg = score >= 4 ? "bg-blue-600" : (score >= 3 ? "bg-indigo-600" : "bg-rose-600");
 
-                document.getElementById('eval-one-leg').innerHTML = `
+                    document.getElementById('eval-one-leg').innerHTML = `
                     <span class="inline-block ${colorLeg} text-white text-[10px] px-2 py-0.5 rounded-full mr-2 mb-1">${statusLeg} (${methodLabel})</span><br>
                     <span class="text-blue-700 font-bold">${relativeToMeanLeg}</span><br>
                     ${score <= 2 ? "バランス機能の向上が望ましいです。" : "良好なバランス機能です。"}
                 `;
 
-                inputSection.classList.add('hidden');
-                resultSection.classList.remove('hidden');
-                switchTab('summary');
-                window.scrollTo(0, 0);
-            } catch (err) {
-                console.error(err);
-                alert("計算中にエラーが発生しました。入力を確認してください。");
+                    inputSection.classList.add('hidden');
+                    resultSection.classList.remove('hidden');
+                    switchTab('summary');
+                    window.scrollTo(0, 0);
+                } catch (err) {
+                    console.error(err);
+                    alert("計算中にエラーが発生しました。入力を確認してください。");
+                }
             }
-        }
 
-        function switchTab(tab) {
-            const sumCont = document.getElementById('feedback-content');
-            const detCont = document.getElementById('content-details');
-            const sumTab = document.getElementById('tab-summary');
-            const detTab = document.getElementById('tab-details');
+            function switchTab(tab) {
+                const sumCont = document.getElementById('feedback-content');
+                const detCont = document.getElementById('content-details');
+                const sumTab = document.getElementById('tab-summary');
+                const detTab = document.getElementById('tab-details');
 
-            if (tab === 'summary') {
-                sumCont.style.display = 'block';
-                detCont.style.display = 'none';
-                sumTab.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
-                sumTab.classList.remove('text-white');
-                detTab.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
-                detTab.classList.add('text-white');
-            } else {
-                sumCont.style.display = 'none';
-                detCont.style.display = 'block';
-                detTab.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
-                detTab.classList.remove('text-white');
-                sumTab.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
-                sumTab.classList.add('text-white');
-                window.scrollTo(0, document.querySelector('#content-details').offsetTop - 20);
+                if (tab === 'summary') {
+                    sumCont.style.display = 'block';
+                    detCont.style.display = 'none';
+                    sumTab.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+                    sumTab.classList.remove('text-white');
+                    detTab.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+                    detTab.classList.add('text-white');
+                } else {
+                    sumCont.style.display = 'none';
+                    detCont.style.display = 'block';
+                    detTab.classList.add('bg-white', 'text-indigo-700', 'shadow-sm');
+                    detTab.classList.remove('text-white');
+                    sumTab.classList.remove('bg-white', 'text-indigo-700', 'shadow-sm');
+                    sumTab.classList.add('text-white');
+                    window.scrollTo(0, document.querySelector('#content-details').offsetTop - 20);
+                }
             }
-        }
 
-        async function saveAsPDF(event) {
-            const btn = event.currentTarget;
-            const originalText = btn.innerHTML;
-            const app = document.getElementById('app-container');
-            const area = document.getElementById('pdf-capture-area');
+            async function saveAsPDF(event) {
+                const btn = event.currentTarget;
+                const originalText = btn.innerHTML;
+                const app = document.getElementById('app-container');
+                const area = document.getElementById('pdf-capture-area');
 
-            try {
-                btn.innerText = "作成中...";
-                btn.disabled = true;
+                try {
+                    btn.innerText = "作成中...";
+                    btn.disabled = true;
 
-                // 1. 動的データを複製
-                const summarySource = document.querySelector('#feedback-content');
-                document.getElementById('summary-clone').innerHTML = summarySource.innerHTML;
+                    // 1. 動的データを複製
+                    const summarySource = document.querySelector('#feedback-content');
+                    document.getElementById('summary-clone').innerHTML = summarySource.innerHTML;
 
-                // 2. 画面を切り替える（これが「白紙」を防ぐ最も確実な方法です）
-                const originalScrollY = window.scrollY;
-                app.style.display = 'none'; // メイン画面を隠す
-                area.style.display = 'block'; // PDF画面を出す
-                window.scrollTo(0, 0);
+                    // 2. 画面を切り替える（これが「白紙」を防ぐ最も確実な方法です）
+                    const originalScrollY = window.scrollY;
+                    app.style.display = 'none'; // メイン画面を隠す
+                    area.style.display = 'block'; // PDF画面を出す
+                    window.scrollTo(0, 0);
 
-                // レンダリング待ち
-                await new Promise(resolve => setTimeout(resolve, 300));
+                    // レンダリング待ち
+                    await new Promise(resolve => setTimeout(resolve, 300));
 
-                const opt = {
-                    margin: 0,
-                    filename: '体力測定フィードバック.pdf',
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: {
-                        scale: 2,
-                        useCORS: true,
-                        logging: false,
-                        width: 794,
-                        windowWidth: 794,
-                        x: 0,
-                        y: 0
-                    },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
+                    const opt = {
+                        margin: 0,
+                        filename: '体力測定フィードバック.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: {
+                            scale: 2,
+                            useCORS: true,
+                            logging: false,
+                            width: 794,
+                            windowWidth: 794,
+                            x: 0,
+                            y: 0
+                        },
+                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                        pagebreak: { mode: 'css' }
+                    };
 
-                // 3. キャプチャ実行
-                await html2pdf().set(opt).from(area).save();
+                    // 3. キャプチャ実行
+                    await html2pdf().set(opt).from(area).save();
 
-            } catch (err) {
-                console.error('PDF error:', err);
-                alert("PDFの作成中にエラーが発生しました。");
-            } finally {
-                // 4. 元に戻す
-                area.style.display = 'none';
-                app.style.display = 'block';
-                window.scrollTo(0, originalScrollY);
-                btn.innerHTML = originalText;
-                btn.disabled = false;
+                } catch (err) {
+                    console.error('PDF error:', err);
+                    alert("PDFの作成中にエラーが発生しました。");
+                } finally {
+                    // 4. 元に戻す
+                    area.style.display = 'none';
+                    app.style.display = 'block';
+                    window.scrollTo(0, originalScrollY);
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
             }
-        }
-    </script>
+        </script>
 </body>
 
 </html>
