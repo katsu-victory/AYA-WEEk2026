@@ -817,8 +817,48 @@
             const inputSection = document.getElementById('input-section');
             const resultSection = document.getElementById('result-section');
 
+            // フォームデータの永続化
+            const STORAGE_KEY = 'physical_feedback_data';
+
+            function saveToLocalStorage() {
+                const data = {
+                    gender: document.getElementById('gender').value,
+                    ageGroup: document.getElementById('age-group').value,
+                    height: document.getElementById('height').value,
+                    twoStep: document.getElementById('two-step').value,
+                    cs30: document.getElementById('cs30').value,
+                    oneLeg: document.getElementById('one-leg').value,
+                    oneLegMethod: document.getElementById('one-leg-method').value
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            }
+
+            function loadFromLocalStorage() {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const data = JSON.parse(saved);
+                    if (data.gender) document.getElementById('gender').value = data.gender;
+                    if (data.ageGroup) document.getElementById('age-group').value = data.ageGroup;
+                    if (data.height) document.getElementById('height').value = data.height;
+                    if (data.twoStep) document.getElementById('two-step').value = data.twoStep;
+                    if (data.cs30) document.getElementById('cs30').value = data.cs30;
+                    if (data.oneLeg) document.getElementById('one-leg').value = data.oneLeg;
+                    if (data.oneLegMethod) document.getElementById('one-leg-method').value = data.oneLegMethod;
+                }
+            }
+
+            // 初期読み込み
+            loadFromLocalStorage();
+
+            // 入力変更時に保存
+            form.querySelectorAll('input, select').forEach(el => {
+                el.addEventListener('change', saveToLocalStorage);
+                el.addEventListener('input', saveToLocalStorage);
+            });
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
+                saveToLocalStorage();
                 calculate();
             });
 
